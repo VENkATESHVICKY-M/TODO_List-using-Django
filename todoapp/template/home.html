@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<title>
+    TODO
+</title>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .head{
+		margin:3px;
+		padding:10px;
+		color:white;
+		border:1px grey;
+		text-align:center;
+		background-color:grey;
+		}
+        body{
+            border: 1px solid black;
+            margin: 9mm;
+            background-color: silver;
+        }
+        .cone{
+            margin-left: 525px;
+        }
+        .ctwo{
+            margin:1cm;
+            padding: 1cm;
+            border: 1px solid black;
+            text-align: center;
+        }
+        #name{
+
+		border: 1px solid black;
+	    background:transparent;
+		margin-right:10px;
+		display: inline-block;
+		padding: 10px 30px;
+
+        }
+        #btn{
+            padding: 10px;
+            background:grey;
+            margin-left: 21mm;
+
+        }
+        #btn-1{
+            padding: 10px;
+            background:rgba(255, 0, 0, 0.816);
+
+        }
+        #btn-2{
+            padding: 10px;
+            background:springgreen;
+
+        }
+        #btn:hover{
+            background-color: grey;
+        }
+        #btn-1:hover{
+            background-color:red;
+        }
+        #btn-2:hover{
+            background-color:seagreen;
+        }
+        ul{
+            list-style-type: none;
+            overflow: hidden;
+            margin: 0px;
+            padding: 0px;
+
+        }
+        li a{
+            display: block;
+
+        }
+        li{
+            float:inherit;
+        }
+        .up{
+            text-align: center;
+            color: black;
+            background-color: chartreuse;
+            border: 1px solid green;
+            margin-left: 14cm;
+            margin-right: 14cm;
+            padding: 10px;
+            text-decoration: chartreuse;
+        }
+        #up:hover{
+            background-color: black;
+        }
+    </style>
+</head>
+<!---------------------------->
+<body>
+    <div class="head">
+		<h1> <pre>TODO LIST!!! </pre></h1>
+		<hr>
+	</div>
+<div class="m1">
+  
+    <div class="cone">
+        <form method="POST">
+        {% csrf_token %}
+            <input type="text" name="todo" placeholder="enter todo"  id="name" ><br>
+            <input type="submit" value="submit" id="btn">
+        </form>
+    </div>
+    <ul>
+    <div class="ctwo">
+        {% for i in todata %}
+
+        <form action="/remove/{{i.id}}/" method="POST">
+        {% csrf_token %}
+            <h3 style="border: 1px solid black;margin-left:6cm;margin-right: 6cm;padding: 10px;">{{i.data}}</h3>
+            <li><a><input type="submit" value="remove" id="btn-1"></a></li>
+        </form>
+
+        <form method="POST">
+        {% csrf_token %}
+        <li><a href="{% url 'update' i.id %}" class="up">update</a></li>
+        </form>
+        {% endfor %}
+        
+
+    </div>
+    </ul>
+</div>
+</body>
+</html>
